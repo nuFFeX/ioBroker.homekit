@@ -17,6 +17,8 @@ Within Admin Settings you can set following Attributes
 ## Installation
 - Enums are no longer needed, Objects were included cause of ioBroker roles.
 
+Note: on some systems additional package is required ```sudo apt-get install libavahi-compat-libdnssd-dev```
+
 (For Usage you must define a enum named enum.homekit.
 There you must include all needed Objects.
 Set a common Name for all Objects e.g. hm-rpc.0.JEQ0225305.1.TEMPERATURE = Kinderzimmer)
