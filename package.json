@@ -22,9 +22,9 @@
     "url": "git+https://github.com/husky-koglhof/ioBroker.homekit.git"
   },
   "dependencies": {
-    "hap-nodejs": "0.2.6",
-    "yalm": "^2.0.0",
-    "yargs": "^3.25.0"
+    "hap-nodejs": "^0.3.2",
+    "yalm": "^4.0.2",
+    "yargs": "^4.8.1"
   },
   "devDependencies": {},
   "os": [
