@@ -755,18 +755,23 @@ var createAccessory = {
                     addr = object._id;
                 }
                 adapter.log.debug('< hap ' + objName + ' get Switch for ' + addr);
-
-                value = states[addr].val;
-                if (value === true || value === 0 || value === "0") {
-                    value = true;
-                } else if (value === false || value === 1 || value === "1") {
-                    value = false;
+                
+                if (!states[addr]) {
+                    adapter.log.warn('Request for nonexisting state "' + addr + '"!');
+                    if (callback) callback(null, null);   
                 } else {
-                    value = false;
-                }
+                    value = states[addr].val;
+                    if (value === true || value === 0 || value === "0") {
+                        value = true;
+                    } else if (value === false || value === 1 || value === "1") {
+                        value = false;
+                    } else {
+                        value = false;
+                    }
 
-                //adapter.subscribeForeignStates(addr);
-                if (callback) callback(null, value);
+                    //adapter.subscribeForeignStates(addr);
+                    if (callback) callback(null, value);   
+                } 
             });
 
         sensor.getService(Service.Switch)
