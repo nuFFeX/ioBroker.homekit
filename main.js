@@ -321,7 +321,7 @@ function main() {
 
         object = objects[sw];
         // Homematic Switches have PARENT_TYPE e.g. HM-LC-Sw2-FM
-        if (object.native.PARENT_TYPE != undefined) {
+        if (object && object.native && object.native.PARENT_TYPE != undefined) {
             if (createAccessory['Switch']) {
                 accessory = accessories['Switch'];
                 map.object = object;
@@ -401,11 +401,13 @@ function identify(settings, paired, callback) {
 }
 
 function setInfos(acc, settings) {
-    if (settings.ADDRESS || settings.TYPE) {
-        acc.getService(Service.AccessoryInformation)
-            .setCharacteristic(Characteristic.Manufacturer, "Homematic" || "-")
-            .setCharacteristic(Characteristic.Model, settings.TYPE || "-" )
-            .setCharacteristic(Characteristic.SerialNumber, settings.ADDRESS || "-");
+    if (settings) {
+        if (settings.ADDRESS || settings.TYPE) {
+            acc.getService(Service.AccessoryInformation)
+                .setCharacteristic(Characteristic.Manufacturer, "Homematic" || "-")
+                .setCharacteristic(Characteristic.Model, settings.TYPE || "-")
+                .setCharacteristic(Characteristic.SerialNumber, settings.ADDRESS || "-");
+        }
     }
 }
 
@@ -749,7 +751,7 @@ var createAccessory = {
             .on('get', function (callback) {
                 var addr;
                 // Homematic Switches have PARENT_TYPE e.g. HM-LC-Sw2-FM
-                if (object.native.PARENT_TYPE != undefined) {
+                if (object && object.native && object.native.PARENT_TYPE != undefined) {
                     addr = object._id + accessory['State'][object.native.PARENT_TYPE];
                 } else {
                     addr = object._id;
@@ -803,7 +805,7 @@ var createAccessory = {
             });
         var addr;
         // Homematic Switches have PARENT_TYPE e.g. HM-LC-Sw2-FM
-        if (object.native.PARENT_TYPE != undefined) {
+        if (object && object.native && object.native.PARENT_TYPE != undefined) {
             addr = object._id + accessory['State'][object.native.PARENT_TYPE];
         } else {
             addr = object._id;
