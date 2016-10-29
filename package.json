@@ -1,5 +1,5 @@
 {
-  "name": "iobroker.homekit",
+  "name": "iobroker.homekit2",
   "description": "Apple HomeKit based on HAP-NodeJS",
   "version": "0.1.6",
   "author": {

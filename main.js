@@ -10,7 +10,7 @@ var states =            {};
 var enums =             [];
 
 var adapter = utils.adapter({
-    name: 'homekit',
+    name: 'homekit2',
 
     ready: function () {
         getData(function () {

@@ -1,6 +1,6 @@
 {
     "common": {
-        "name":                     "homekit",
+        "name":                     "homekit2",
         "title":                    "homekit",
         "desc":                     "Apple HomeKit based on HAP-NodeJS",
         "version":                  "0.1.6",
