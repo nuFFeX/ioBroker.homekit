@@ -35,7 +35,6 @@
     "url": "https://github.com/husky-koglhof/ioBroker.homekit/issues"
   },
   "main": "main.js",
-  "gitHead": "e93dd2c488fed151920369a1998e0343fd1d9042",
   "maintainers": [
     {
       "name": "versteckt",

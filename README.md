@@ -1,6 +1,10 @@
 ![Logo](admin/homekit.png)
 ioBroker HomeKit Adapter
-==============
+===============================
+[![NPM version](http://img.shields.io/npm/v/iobroker.homekit.svg)](https://www.npmjs.com/package/iobroker.homekit)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.homekit.svg)](https://www.npmjs.com/package/iobroker.homekit)
+
+[![NPM](https://nodei.co/npm/iobroker.homekit.png?downloads=true)](https://nodei.co/npm/iobroker.homekit/)
 
 HomeKit Adapter for ioBroker
 
@@ -47,6 +51,9 @@ Within Homekit you can see the actual temperature and humidity from the Thermost
 The Switch can be used within Homekit.
 
 ## Changelog
+### 0.1.6 (2016-10-29)
+ - (PArns) Fix compatibility issues
+
 ### 0.1.4 (2016-03-05)
  - (husky-koglhof)
    Fixed Exception (error: TypeError: Cannot read property 'val' of null)
