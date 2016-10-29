@@ -1,10 +1,10 @@
 ![Logo](admin/homekit.png)
 ioBroker HomeKit Adapter
 ===============================
-[![NPM version](http://img.shields.io/npm/v/iobroker.homekit.svg)](https://www.npmjs.com/package/iobroker.homekit)
-[![Downloads](https://img.shields.io/npm/dm/iobroker.homekit.svg)](https://www.npmjs.com/package/iobroker.homekit)
+[![NPM version](http://img.shields.io/npm/v/iobroker.homekit2.svg)](https://www.npmjs.com/package/iobroker.homekit2)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.homekit2.svg)](https://www.npmjs.com/package/iobroker.homekit2)
 
-[![NPM](https://nodei.co/npm/iobroker.homekit.png?downloads=true)](https://nodei.co/npm/iobroker.homekit/)
+[![NPM](https://nodei.co/npm/iobroker.homekit2.png?downloads=true)](https://nodei.co/npm/iobroker.homekit2/)
 
 HomeKit Adapter for ioBroker
 
