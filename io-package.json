@@ -1,9 +1,9 @@
 {
     "common": {
-        "name":                     "homekit",
+        "name":                     "homekit2",
         "title":                    "homekit",
         "desc":                     "Apple HomeKit based on HAP-NodeJS",
-        "version":                  "0.1.4",
+        "version":                  "0.1.6",
         "mode":                     "daemon",
         "platform":                 "javascript/Node.js",
         "os":                       ["darwin", "linux"],
@@ -19,6 +19,7 @@
         "icon":                     "homekit.png",
         "extIcon":                  "https://raw.githubusercontent.com/husky-koglhof/ioBroker.homekit/master/admin/homekit.png",
         "singleton":                true,
+		"type":                     "common adapters",
         "messagebox":               true
     },
     "native": {

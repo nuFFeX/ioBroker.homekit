@@ -1,6 +1,10 @@
 ![Logo](admin/homekit.png)
 ioBroker HomeKit Adapter
-==============
+===============================
+[![NPM version](http://img.shields.io/npm/v/iobroker.homekit2.svg)](https://www.npmjs.com/package/iobroker.homekit2)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.homekit2.svg)](https://www.npmjs.com/package/iobroker.homekit2)
+
+[![NPM](https://nodei.co/npm/iobroker.homekit2.png?downloads=true)](https://nodei.co/npm/iobroker.homekit2/)
 
 HomeKit Adapter for ioBroker
 
@@ -16,6 +20,8 @@ Within Admin Settings you can set following Attributes
 
 ## Installation
 - Enums are no longer needed, Objects were included cause of ioBroker roles.
+
+Note: on some systems additional package is required ```sudo apt-get install libavahi-compat-libdnssd-dev```
 
 (For Usage you must define a enum named enum.homekit.
 There you must include all needed Objects.
@@ -45,6 +51,9 @@ Within Homekit you can see the actual temperature and humidity from the Thermost
 The Switch can be used within Homekit.
 
 ## Changelog
+### 0.1.6 (2016-10-29)
+ - (PArns) Fix compatibility issues
+
 ### 0.1.4 (2016-03-05)
  - (husky-koglhof)
    Fixed Exception (error: TypeError: Cannot read property 'val' of null)

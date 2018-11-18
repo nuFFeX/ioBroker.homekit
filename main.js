@@ -10,7 +10,7 @@ var states =            {};
 var enums =             [];
 
 var adapter = utils.adapter({
-    name: 'homekit',
+    name: 'homekit2',
 
     ready: function () {
         getData(function () {
@@ -321,7 +321,7 @@ function main() {
 
         object = objects[sw];
         // Homematic Switches have PARENT_TYPE e.g. HM-LC-Sw2-FM
-        if (object.native.PARENT_TYPE != undefined) {
+        if (object && object.native && object.native.PARENT_TYPE != undefined) {
             if (createAccessory['Switch']) {
                 accessory = accessories['Switch'];
                 map.object = object;
@@ -401,11 +401,13 @@ function identify(settings, paired, callback) {
 }
 
 function setInfos(acc, settings) {
-    if (settings.ADDRESS || settings.TYPE) {
-        acc.getService(Service.AccessoryInformation)
-            .setCharacteristic(Characteristic.Manufacturer, "Homematic" || "-")
-            .setCharacteristic(Characteristic.Model, settings.TYPE || "-" )
-            .setCharacteristic(Characteristic.SerialNumber, settings.ADDRESS || "-");
+    if (settings) {
+        if (settings.ADDRESS || settings.TYPE) {
+            acc.getService(Service.AccessoryInformation)
+                .setCharacteristic(Characteristic.Manufacturer, "Homematic" || "-")
+                .setCharacteristic(Characteristic.Model, settings.TYPE || "-")
+                .setCharacteristic(Characteristic.SerialNumber, settings.ADDRESS || "-");
+        }
     }
 }
 
@@ -749,24 +751,29 @@ var createAccessory = {
             .on('get', function (callback) {
                 var addr;
                 // Homematic Switches have PARENT_TYPE e.g. HM-LC-Sw2-FM
-                if (object.native.PARENT_TYPE != undefined) {
+                if (object && object.native && object.native.PARENT_TYPE != undefined) {
                     addr = object._id + accessory['State'][object.native.PARENT_TYPE];
                 } else {
                     addr = object._id;
                 }
                 adapter.log.debug('< hap ' + objName + ' get Switch for ' + addr);
-
-                value = states[addr].val;
-                if (value === true || value === 0 || value === "0") {
-                    value = true;
-                } else if (value === false || value === 1 || value === "1") {
-                    value = false;
+                
+                if (!states[addr]) {
+                    adapter.log.warn('Request for nonexisting state "' + addr + '"!');
+                    if (callback) callback(null, null);   
                 } else {
-                    value = false;
-                }
+                    value = states[addr].val;
+                    if (value === true || value === 0 || value === "0") {
+                        value = true;
+                    } else if (value === false || value === 1 || value === "1") {
+                        value = false;
+                    } else {
+                        value = false;
+                    }
 
-                //adapter.subscribeForeignStates(addr);
-                if (callback) callback(null, value);
+                    //adapter.subscribeForeignStates(addr);
+                    if (callback) callback(null, value);   
+                } 
             });
 
         sensor.getService(Service.Switch)
@@ -798,7 +805,7 @@ var createAccessory = {
             });
         var addr;
         // Homematic Switches have PARENT_TYPE e.g. HM-LC-Sw2-FM
-        if (object.native.PARENT_TYPE != undefined) {
+        if (object && object.native && object.native.PARENT_TYPE != undefined) {
             addr = object._id + accessory['State'][object.native.PARENT_TYPE];
         } else {
             addr = object._id;

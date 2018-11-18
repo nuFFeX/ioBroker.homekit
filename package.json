@@ -1,7 +1,7 @@
 {
-  "name": "iobroker.homekit",
+  "name": "iobroker.homekit2",
   "description": "Apple HomeKit based on HAP-NodeJS",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "author": {
     "name": "versteckt",
     "email": "husky.koglhof@icloud.com"
@@ -22,9 +22,9 @@
     "url": "git+https://github.com/husky-koglhof/ioBroker.homekit.git"
   },
   "dependencies": {
-    "hap-nodejs": "0.2.6",
-    "yalm": "^2.0.0",
-    "yargs": "^3.25.0"
+    "hap-nodejs": "^0.3.2",
+    "yalm": "^4.0.2",
+    "yargs": "^4.8.1"
   },
   "devDependencies": {},
   "os": [
@@ -35,7 +35,6 @@
     "url": "https://github.com/husky-koglhof/ioBroker.homekit/issues"
   },
   "main": "main.js",
-  "gitHead": "e93dd2c488fed151920369a1998e0343fd1d9042",
   "maintainers": [
     {
       "name": "versteckt",

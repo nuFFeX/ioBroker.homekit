@@ -18,7 +18,7 @@
             border-collapse: collapse;
         }
         td.line{
-            border-top:1px solid black;
+            border-top: 1px solid black;
         }
     </style>
 
@@ -26,7 +26,7 @@
         var accessories = {};
         var devices = [];
 
-        changed = false;
+        var onChange = null;
         systemDictionary = {
             "Suppress Refresh": {
                 "en": "Suppress Refresh",
@@ -35,36 +35,37 @@
             },
             "accessory": {
                 "en": "Accessory",
-                "de": "Zubehör"
+                "de": "Zubehör",
+                "ru": "Устройства"
             },
             "object": {
                 "en": "Object",
-                "de": "Objekt"
+                "de": "Objekt",
+                "ru": "Объект"
             },
             "parent": {
                 "en": "Parent",
-                "de": "Hersteller"
+                "de": "Hersteller",
+                "ru": "Производитель"
             },
             "state": {
-                "en:": "State",
-                "de:": "Status"
+                "en": "State",
+                "de": "Status",
+                "ru": "Состояние"
             }
         };
 
         function setValue(id, value) {
             // example: select elements with id=key and class=value and insert value
-            if ($('#' + id + '.value').attr('type') == 'checkbox') {
-                $('#' + id + '.value').prop('checked', value).change(function() {
-                    changed = true;
-                    $('#save').button("enable");
+            if ($('#' + id + '.value').attr('type') === 'checkbox') {
+                $('#' + id + '.value').prop('checked', value).change(function () {
+                    onChange();
                 });
             } else {
-                $('#' + id + '.value').val(value).change(function() {
-                    changed = true;
-                    $('#save').button("enable");
+                $('#' + id + '.value').val(value).change(function () {
+                    onChange();
                 }).keyup(function() {
-                    changed = true;
-                    $('#save').button("enable");
+                    onChange();
                 });
             }
         }
@@ -74,10 +75,10 @@
 
             if (subparam && param) {
                 for (var key in settings[param][subparam]) {
-                    if (typeof settings[param][subparam][key] != 'object') {
+                    if (typeof settings[param][subparam][key] !== 'object') {
                         setValue(param + '_' + subparam + '_' + key, settings[param][subparam][key]);
                     } else {
-                        alert("4th level is not supported");
+                        alert('4th level is not supported');
                     }
                 }
             } else if (param) {
@@ -100,14 +101,21 @@
         }
 
         // the function loadSettings has to exist ...
-        function load(settings, onChange) {
+        function load(settings, _onChange) {
+            onChange = _onChange;
             // example: select elements with id=key and class=value and insert value
             for (var key in settings) {
                 // example: select elements with id=key and class=value and insert value
-                if ($('#' + key + '.value').attr('type') == 'checkbox') {
-                    $('#' + key + '.value').prop('checked', settings[key]).change(onChange);
+                if ($('#' + key + '.value').attr('type') === 'checkbox') {
+                    $('#' + key + '.value').prop('checked', settings[key]).change(function () {
+                        onChange();
+                    });
                 } else {
-                    $('#' + key + '.value').val(settings[key]).change(onChange).keyup(onChange);
+                    $('#' + key + '.value').val(settings[key]).change(function () {
+                        onChange();
+                    }).keyup(function () {
+                        onChange();
+                    });
                 }
             }
 
@@ -115,58 +123,58 @@
             /* ***************************************** */
             editTable('devices', ['accessory', 'object', 'parent', 'state'], devices, 1);
 
-            accessories = settings["Accessories"] || {};
+            accessories = settings.Accessories || {};
 
 
             if (accessories !== undefined) {
                 var $grid = $('#devices');
 
                 // First get Root Object
-                var switches = accessories.Switch;
-                var thermostat = accessories.Thermostat;
+                var switches    = accessories.Switch;
+                var thermostat  = accessories.Thermostat;
                 var temperature = accessories.Temperature;
-                var humidity = accessories.Humidity;
+                var humidity    = accessories.Humidity;
 
                 for (var object in switches) {
                     for (var type in switches[object]) {
-                        addToTable("devices", {
-                            accessory: "Switch",
-                            object: object,
-                            parent: type,
-                            state: switches[object][type]
+                        addToTable('devices', {
+                            accessory:  'Switch',
+                            object:     object,
+                            parent:     type,
+                            state:      switches[object][type]
                         }, $grid, true);
                     }
                 }
 
                 for (var object in thermostat) {
                     for (var type in thermostat[object]) {
-                        addToTable("devices", {
-                            accessory: "Thermostat",
-                            object: object,
-                            parent: type,
-                            state: thermostat[object][type]
+                        addToTable('devices', {
+                            accessory:  'Thermostat',
+                            object:     object,
+                            parent:     type,
+                            state:      thermostat[object][type]
                         }, $grid, true);
                     }
                 }
 
                 for (var object in temperature) {
                     for (var type in temperature[object]) {
-                        addToTable("devices", {
-                            accessory: "Temperature",
-                            object: object,
-                            parent: type,
-                            state: temperature[object][type]
+                        addToTable('devices', {
+                            accessory:  'Temperature',
+                            object:     object,
+                            parent:     type,
+                            state:      temperature[object][type]
                         }, $grid, true);
                     }
                 }
 
                 for (var object in humidity) {
                     for (var type in humidity[object]) {
-                        addToTable("devices", {
-                            accessory: "Humidity",
-                            object: object,
-                            parent: type,
-                            state: humidity[object][type]
+                        addToTable('devices', {
+                            accessory:  'Humidity',
+                            object:     object,
+                            parent:     type,
+                            state:      humidity[object][type]
                         }, $grid, true);
                     }
                 }
@@ -194,10 +202,10 @@
             var devices = {};
             for (value in obj.devices) {
                 var o = obj.devices[value];
-                var accessory = o['accessory'];
-                var object = o['object'];
-                var parent = o['parent'];
-                var state = o['state'];
+                var accessory   = o['accessory'];
+                var object      = o['object'];
+                var parent      = o['parent'];
+                var state       = o['state'];
 
                 if (json[accessory] === undefined) {
                     json[accessory] = {};
@@ -211,12 +219,11 @@
             }
             var settings = {};
             settings['Accessories'] = json;
-            settings['username'] = obj.username;
-            settings['pincode'] = obj.pincode;
-            settings['port'] = obj.port;
-            settings['bridgename'] = obj.bridgename;
+            settings['username']    = obj.username;
+            settings['pincode']     = obj.pincode;
+            settings['port']        = obj.port;
+            settings['bridgename']  = obj.bridgename;
 
-            $('#save').button("disable");
             callback(settings);
         }
 
@@ -248,10 +255,11 @@
             <td><input class="value" id="port"/></td>
         </tr>
         </tbody>
-        <th>Configuration Objects</th>
+        <th class="translate">Configuration Objects</th>
         <tr>
-            <table id="devices"></table><div id="pager-devices" style="width:1024px"></div>
+            <table id="devices"></table><div id="pager-devices" style="width: 1024px"></div>
         </tr>
     </table>
 </div>
-</body></html>
+</body>
+</html>
